@@ -4,6 +4,9 @@ inputs:
   registry:
     description: 'Registry url'
     required: true
+  namespace:
+    description: 'Namespace'
+    required: true
   password:
     description: 'Password'
     required: true
@@ -43,4 +46,4 @@ runs:
       cache-from: type=local,src=/tmp/.buildx-cache,mode=max
       cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
       push: true
-      tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
+      tags: ${{ inputs.registry }}/${{ inputs.namespace }}/${{ inputs.image_name }}:${{ inputs.tag }}
