@@ -41,9 +41,9 @@ runs:
     uses: actions/cache@v2
     with:
       path: /tmp/.buildx-cache
-      key: ${{ runner.os }}-buildx-${{ inputs.image_name }}
+      key: ${{ runner.os }}-buildx-${{ inputs.image_name }}-${{ inputs.tag }}
       restore-keys: |
-        ${{ runner.os }}-buildx-${{ inputs.image_name }}
+        ${{ runner.os }}-buildx-${{ inputs.image_name }}-
   - name: Build and push
     uses: docker/build-push-action@v3
     with:
