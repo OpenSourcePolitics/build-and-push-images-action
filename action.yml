@@ -20,6 +20,10 @@ inputs:
   tag:
     description: 'Image tags'
     required: true
+  push:
+    description: 'Push image to registry'
+    required: true
+    default: "true"
 
 runs:
   using: "composite"
@@ -45,5 +49,6 @@ runs:
     with:
       cache-from: type=local,src=/tmp/.buildx-cache,mode=max
       cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
-      push: true
+      push: ${{ inputs.push == 'true' }}
+      load: ${{ inputs.push != 'true' }}
       tags: ${{ inputs.registry }}/${{ inputs.namespace }}/${{ inputs.image_name }}:${{ inputs.tag }}
