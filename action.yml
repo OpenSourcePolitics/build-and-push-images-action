@@ -24,6 +24,10 @@ inputs:
     description: 'Push image to registry'
     required: true
     default: "true"
+  context:
+    description: 'Context'
+    required: false
+    default: "."
 
 runs:
   using: "composite"
@@ -59,3 +63,4 @@ runs:
       push: ${{ inputs.push == 'true' }}
       load: ${{ inputs.push != 'true' }}
       tags: ${{ inputs.registry }}/${{ inputs.namespace }}/${{ inputs.image_name }}:${{ steps.clean_tag.outputs.tag }}
+      context: ${{ inputs.context }}
