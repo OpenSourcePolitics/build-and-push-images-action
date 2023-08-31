@@ -49,6 +49,7 @@ runs:
       username: ${{ inputs.username }}
       password: ${{ inputs.password }}
   - name: Cache Docker layers
+    if: ${{ inputs.push != 'true' }}
     uses: actions/cache@v2
     with:
       path: /tmp/.buildx-cache
