@@ -63,5 +63,9 @@ runs:
       cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
       push: ${{ inputs.push == 'true' }}
       load: ${{ inputs.push != 'true' }}
+      build-args: |
+        DOCKER_IMAGE_NAME=${{ inputs.image_name }}
+        DOCKER_IMAGE_TAG=${{ steps.clean_tag.outputs.tag }}
+        DOCKER_IMAGE=${{ inputs.registry }}/${{ inputs.namespace }}/${{ inputs.image_name }}:${{ steps.clean_tag.outputs.tag }}
       tags: ${{ inputs.registry }}/${{ inputs.namespace }}/${{ inputs.image_name }}:${{ steps.clean_tag.outputs.tag }}
       context: ${{ inputs.context }}
